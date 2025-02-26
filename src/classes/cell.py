@@ -7,6 +7,7 @@ class Cell():
     self.has_right_wall = True
     self.has_top_wall = True
     self.has_bottom_wall = True
+    self.visited = False
     self._x1 = None
     self._x2 = None
     self._y1 = None
@@ -15,11 +16,11 @@ class Cell():
     self._win = win
     self.colour = colour
 
-  def draw(self, x1=None, y1=None, x2=None, y2=None, colour="black"):
-    self._x1 = (x1 if x1 else self._x1)
-    self._x2 = (x2 if x2 else self._x2)
-    self._y1 = (y1 if y1 else self._y1)
-    self._y2 = (y2 if y2 else self._y2)
+  def draw(self, x1, y1, x2, y2, colour="black"):
+    self._x1 = x1
+    self._x2 = x2
+    self._y1 = y1
+    self._y2 = y2
     self.colour = colour
     center_x = min(self._x1, self._x2) + ((max(self._x1, self._x2) - min(self._x1, self._x2)) / 2)
     center_y = min(self._y1, self._y2) + ((max(self._y1, self._y2) - min(self._y1, self._y2)) / 2)
