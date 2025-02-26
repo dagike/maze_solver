@@ -49,3 +49,6 @@ class Cell():
       self._win.draw_line(Line(self.center, to_cell.center), line_colour)
     else: 
       raise Exception(f"CELL CENTER IS NOT DEFINED self={self.center} to_cell={to_cell.center}")
+    
+  def __repr__(self):
+    return f"(x1={self._x1} y1={self._y1} x2={self._x2} y2={self._y2})"
