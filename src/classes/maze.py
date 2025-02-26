@@ -34,9 +34,15 @@ class Maze():
         x2 = x1 + self.cell_size_x
         y2 = y1 + self.cell_size_y
         self._cells[x][y].draw(x1, y1, x2, y2)
-        print(f"{x}, {y} = {self._cells[x][y]}")
         self._animate()
+    self._break_entrance_and_exit()
 
   def _animate(self):
     self.win.redraw()
     time.sleep(0.005)
+
+  def _break_entrance_and_exit(self):
+    self._cells[0][0].has_top_wall = False
+    self._cells[0][0].draw()
+    self._cells[-1][-1].has_bottom_wall = False
+    self._cells[-1][-1].draw()
