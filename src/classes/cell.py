@@ -15,31 +15,27 @@ class Cell():
     self._win = win
     self.colour = colour
 
-  def draw(self, x1, y1, x2, y2, colour="black"):
-    self._x1 = x1
-    self._x2 = x2
-    self._y1 = y1
-    self._y2 = y2
+  def draw(self, x1=None, y1=None, x2=None, y2=None, colour="black"):
+    self._x1 = (x1 if x1 else self._x1)
+    self._x2 = (x2 if x2 else self._x2)
+    self._y1 = (y1 if y1 else self._y1)
+    self._y2 = (y2 if y2 else self._y2)
     self.colour = colour
-    center_x = min(x1, x2) + ((max(x1, x2) - min(x1, x2)) / 2)
-    center_y = min(y1, y2) + ((max(y1, y2) - min(y1, y2)) / 2)
+    center_x = min(self._x1, self._x2) + ((max(self._x1, self._x2) - min(self._x1, self._x2)) / 2)
+    center_y = min(self._y1, self._y2) + ((max(self._y1, self._y2) - min(self._y1, self._y2)) / 2)
     self.center = Point(center_x, center_y)
 
-    if(self.has_left_wall):
-      left_wall = Line(Point(self._x1, self._y1), Point(self._x1, self._y2))
-      self._win.draw_line(left_wall, self.colour)
+    left_wall = Line(Point(self._x1, self._y1), Point(self._x1, self._y2))
+    self._win.draw_line(left_wall, self.colour if self.has_left_wall else "white")
 
-    if(self.has_right_wall):
-      right_wall = Line(Point(self._x2, self._y1), Point(self._x2, self._y2))
-      self._win.draw_line(right_wall, self.colour)
+    right_wall = Line(Point(self._x2, self._y1), Point(self._x2, self._y2))
+    self._win.draw_line(right_wall, self.colour if self.has_right_wall else "white")
 
-    if(self.has_top_wall):
-      top_wall = Line(Point(self._x1, self._y1), Point(self._x2, self._y1))
-      self._win.draw_line(top_wall, self.colour)
+    top_wall = Line(Point(self._x1, self._y1), Point(self._x2, self._y1))
+    self._win.draw_line(top_wall, self.colour if self.has_top_wall else "white")
 
-    if(self.has_bottom_wall):
-      bottom_wall = Line(Point(self._x1, self._y2), Point(self._x2, self._y2))
-      self._win.draw_line(bottom_wall, self.colour)
+    bottom_wall = Line(Point(self._x1, self._y2), Point(self._x2, self._y2))
+    self._win.draw_line(bottom_wall, self.colour if self.has_bottom_wall else "white")
 
   def draw_move(self, to_cell, undo=False):
     line_colour = "grey"
